@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEC IELTS - Trang chủ</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f7f6; color: #333; }
+        header { background: #4a90e2; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .logo { font-size: 24px; font-weight: bold; }
+        button { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        #login-btn { background: #fff; color: #4a90e2; }
+        #logout-btn { background: #ff4757; color: #fff; display: none; }
+        button:hover { opacity: 0.8; }
+        
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        .test-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; display: flex; flex-direction: column; justify-content: space-between;}
+        .test-card h3 { margin-top: 0; color: #2c3e50; }
+        .test-card p { color: #64748b; font-size: 14px; }
+        .do-test-btn { background: #2ed573; color: white; margin-top: 15px; width: 100%; display: none; }
+        .lock-msg { color: #ff4757; font-size: 14px; margin-top: 15px; font-weight: bold; padding: 10px 0;}
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">TEC IELTS MASTER</div>
+        <div class="auth-section">
+            <button id="login-btn">Đăng nhập với Google</button>
+            <button id="logout-btn">Đăng xuất</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Danh sách đề thi IELTS</h2>
+        <p id="welcome-msg">Vui lòng đăng nhập để bắt đầu làm bài nhé!</p>
+        <div class="test-grid" id="test-grid">
+            <p id="loading-text">Đang tải danh sách đề thi...</p>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+    <script>
+      const firebaseConfig = {
+    apiKey: "AIzaSyCf0kahngmflEKhf-GEENdAwMIGiAjl-Bg",
+    authDomain: "tec-ielts-master.firebaseapp.com",
+    projectId: "tec-ielts-master",
+    storageBucket: "tec-ielts-master.firebasestorage.app",
+    messagingSenderId: "189299803974",
+    appId: "1:189299803974:web:18e450f31050761bc60747"
+  };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const provider = new firebase.auth.GoogleAuthProvider();
+
+        const loginBtn = document.getElementById('login-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const welcomeMsg = document.getElementById('welcome-msg');
+        const testGrid = document.getElementById('test-grid');
+
+        let isLoggedIn = false;
+        let testListData = [];
+
+        async function loadTestList() {
+            try {
+                const response = await fetch('danh-sach-de.json');
+                testListData = await response.json();
+                renderTests(); 
+            } catch (error) {
+                testGrid.innerHTML = '<p style="color:red;">Lỗi tải dữ liệu đề thi. Mây kiểm tra lại file JSON nha!</p>';
+                console.error(error);
+            }
+        }
+
+        function renderTests() {
+            testGrid.innerHTML = ''; 
+            testListData.forEach(test => {
+                const card = document.createElement('div');
+                card.className = 'test-card';
+                
+                let cardHTML = `
+                    <div>
+                        <h3>${test.title}</h3>
+                        <p>${test.subtitle}</p>
+                    </div>
+                `;
+
+                if (isLoggedIn) {
+                    cardHTML += `<button class="do-test-btn" style="display:block;" onclick="window.location.href='${test.url}'">Làm bài ngay</button>`;
+                } else {
+                    cardHTML += `<div class="lock-msg" style="display:block;">Đăng nhập để làm bài</div>`;
+                }
+
+                card.innerHTML = cardHTML;
+                testGrid.appendChild(card);
+            });
+        }
+
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                isLoggedIn = true;
+                loginBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
+                welcomeMsg.innerHTML = `Chào mừng <b>${user.displayName}</b> quay trở lại! Sẵn sàng chiến đấu chưa? 💖`;
+            } else {
+                isLoggedIn = false;
+                loginBtn.style.display = 'inline-block';
+                logoutBtn.style.display = 'none';
+                welcomeMsg.innerHTML = 'Vui lòng đăng nhập để xem và làm bài nhé!';
+            }
+            if (testListData.length > 0) {
+                renderTests();
+            }
+        });
+
+        loginBtn.addEventListener('click', () => auth.signInWithPopup(provider));
+        logoutBtn.addEventListener('click', () => auth.signOut());
+
+        loadTestList();
+
+    </script>
+</body>
+</html>
