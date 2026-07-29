@@ -1,9 +1,62 @@
 [
     {
+        "id": "mock3",
+        "title": "TEC IELTS Reading Mock Test 3",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Reading_Mock_Test_3.html"
+    },
+    {
+        "id": "mock4",
+        "title": "TEC IELTS Reading Mock Test 4",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Reading_Mock_Test_4.html"
+    },
+    {
+        "id": "mock5",
+        "title": "TEC IELTS Reading Mock Test 5",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Reading_Mock_Test_5.html"
+    },
+    {
+        "id": "mock6",
+        "title": "TEC IELTS Reading Mock Test 6",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Reading_Mock_Test_6.html"
+    },
+    {
+        "id": "mock7",
+        "title": "TEC IELTS Reading Mock Test 7",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Reading_Mock_Test_7.html"
+    },
+    {
         "id": "mock8",
         "title": "TEC IELTS Reading Mock Test 8",
-        "subtitle": "Đề thi thật - Thầy Kiệt",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
         "url": "tests/TEC_IELTS_Reading_Mock_Test_8.html"
+    },
+    {
+        "id": "mock9",
+        "title": "TEC IELTS Reading Mock Test 9",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Reading_Mock_Test_9.html"
+    },
+    {
+        "id": "mock10",
+        "title": "TEC IELTS Reading Mock Test 10",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Reading_Mock_Test_10.html"
+    },
+    {
+        "id": "mock11",
+        "title": "TEC IELTS Reading Mock Test 11",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Reading_Mock_Test_11.html"
+    },
+    {
+        "id": "mock12",
+        "title": "TEC IELTS Reading Mock Test 12",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Reading_Mock_Test_12.html"
     }
-   
 ]
