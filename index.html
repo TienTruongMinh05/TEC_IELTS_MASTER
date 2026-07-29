@@ -70,7 +70,7 @@
                 testListData = await response.json();
                 renderTests(); 
             } catch (error) {
-                testGrid.innerHTML = '<p style="color:red;">Lỗi tải dữ liệu đề thi. Mây kiểm tra lại file JSON nha!</p>';
+                testGrid.innerHTML = '<p style="color:red;">Lỗi tải dữ liệu đề thi!</p>';
                 console.error(error);
             }
         }
@@ -104,7 +104,7 @@
                 isLoggedIn = true;
                 loginBtn.style.display = 'none';
                 logoutBtn.style.display = 'inline-block';
-                welcomeMsg.innerHTML = `Chào mừng <b>${user.displayName}</b> quay trở lại! Sẵn sàng chiến đấu chưa? 💖`;
+                welcomeMsg.innerHTML = `Chào mừng <b>${user.displayName}</b> quay trở lại!`;
             } else {
                 isLoggedIn = false;
                 loginBtn.style.display = 'inline-block';
