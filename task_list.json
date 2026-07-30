@@ -1,60 +1,102 @@
 [
     {
-        "id": "mock3",
+        "id": "L1",
+        "title": "TEC IELTS Listening Mock Test 1",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_1.html"
+    },
+    {
+        "id": "L2",
+        "title": "TEC IELTS Listening Mock Test 2",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_2.html"
+    },
+    {
+        "id": "L3",
+        "title": "TEC IELTS Listening Mock Test 3",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_3.html"
+    },
+    {
+        "id": "L4",
+        "title": "TEC IELTS Listening Mock Test 4",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_4.html"
+    },
+    {
+        "id": "L5",
+        "title": "TEC IELTS Listening Mock Test 5",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_5.html"
+    },
+    {
+        "id": "L6",
+        "title": "TEC IELTS Listening Mock Test 6",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_6.html"
+    },
+    {
+        "id": "L7",
+        "title": "TEC IELTS Listening Mock Test 7",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_7.html"
+    },
+    {
+        "id": "R3",
         "title": "TEC IELTS Reading Mock Test 3",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
         "url": "tests/TEC_IELTS_Reading_Mock_Test_3.html"
     },
     {
-        "id": "mock4",
+        "id": "R4",
         "title": "TEC IELTS Reading Mock Test 4",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
         "url": "tests/TEC_IELTS_Reading_Mock_Test_4.html"
     },
     {
-        "id": "mock5",
+        "id": "R5",
         "title": "TEC IELTS Reading Mock Test 5",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
         "url": "tests/TEC_IELTS_Reading_Mock_Test_5.html"
     },
     {
-        "id": "mock6",
+        "id": "R6",
         "title": "TEC IELTS Reading Mock Test 6",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
         "url": "tests/TEC_IELTS_Reading_Mock_Test_6.html"
     },
     {
-        "id": "mock7",
+        "id": "R7",
         "title": "TEC IELTS Reading Mock Test 7",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
         "url": "tests/TEC_IELTS_Reading_Mock_Test_7.html"
     },
     {
-        "id": "mock8",
+        "id": "R8",
         "title": "TEC IELTS Reading Mock Test 8",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
         "url": "tests/TEC_IELTS_Reading_Mock_Test_8.html"
     },
     {
-        "id": "mock9",
+        "id": "R9",
         "title": "TEC IELTS Reading Mock Test 9",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
         "url": "tests/TEC_IELTS_Reading_Mock_Test_9.html"
     },
     {
-        "id": "mock10",
+        "id": "R10",
         "title": "TEC IELTS Reading Mock Test 10",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
         "url": "tests/TEC_IELTS_Reading_Mock_Test_10.html"
     },
     {
-        "id": "mock11",
+        "id": "R11",
         "title": "TEC IELTS Reading Mock Test 11",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
         "url": "tests/TEC_IELTS_Reading_Mock_Test_11.html"
     },
     {
-        "id": "mock12",
+        "id": "R12",
         "title": "TEC IELTS Reading Mock Test 12",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
         "url": "tests/TEC_IELTS_Reading_Mock_Test_12.html"
