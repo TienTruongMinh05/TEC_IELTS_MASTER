@@ -14,6 +14,11 @@
         button:hover { opacity: 0.8; }
         
         .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        
+        .skill-selection { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
+        .skill-btn { background: #e2e8f0; color: #475569; font-size: 14px; padding: 10px 15px; border-radius: 8px; }
+        .skill-btn.active { background: #4a90e2; color: white; box-shadow: 0 2px 4px rgba(74, 144, 226, 0.4); }
+
         .test-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
         .test-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; display: flex; flex-direction: column; justify-content: space-between;}
         .test-card h3 { margin-top: 0; color: #2c3e50; }
@@ -35,6 +40,14 @@
     <div class="container">
         <h2>Danh sách đề thi IELTS</h2>
         <p id="welcome-msg">Vui lòng đăng nhập để bắt đầu làm bài nhé!</p>
+
+        <div class="skill-selection">
+            <button class="skill-btn active" onclick="loadSkill('R', this)"> READING</button>
+            <button class="skill-btn" onclick="loadSkill('L', this)"> LISTENING</button>
+            <button class="skill-btn" onclick="loadSkill('W', this)"> WRITING</button>
+            <button class="skill-btn" onclick="loadSkill('S', this)"> SPEAKING</button>
+        </div>
+
         <div class="test-grid" id="test-grid">
             <p id="loading-text">Đang tải danh sách đề thi...</p>
         </div>
@@ -44,14 +57,14 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
     <script>
-      const firebaseConfig = {
-    apiKey: "AIzaSyCf0kahngmflEKhf-GEENdAwMIGiAjl-Bg",
-    authDomain: "tec-ielts-master.firebaseapp.com",
-    projectId: "tec-ielts-master",
-    storageBucket: "tec-ielts-master.firebasestorage.app",
-    messagingSenderId: "189299803974",
-    appId: "1:189299803974:web:18e450f31050761bc60747"
-  };
+        const firebaseConfig = {
+            apiKey: "AIzaSyCf0kahngmflEKhf-GEENdAwMIGiAjl-Bg",
+            authDomain: "tec-ielts-master.firebaseapp.com",
+            projectId: "tec-ielts-master",
+            storageBucket: "tec-ielts-master.firebasestorage.app",
+            messagingSenderId: "189299803974",
+            appId: "1:189299803974:web:18e450f31050761bc60747"
+        };
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -63,6 +76,7 @@
 
         let isLoggedIn = false;
         let testListData = [];
+        let currentSkill = 'R'; 
 
         async function loadTestList() {
             try {
@@ -75,9 +89,26 @@
             }
         }
 
+        function loadSkill(skillPrefix, btnElement) {
+            currentSkill = skillPrefix;
+            
+            document.querySelectorAll('.skill-btn').forEach(btn => btn.classList.remove('active'));
+            if(btnElement) btnElement.classList.add('active');
+
+            renderTests();
+        }
+
         function renderTests() {
             testGrid.innerHTML = ''; 
-            testListData.forEach(test => {
+            
+            const filteredTests = testListData.filter(test => test.id.startsWith(currentSkill));
+
+            if (filteredTests.length === 0) {
+                testGrid.innerHTML = '<p style="color:#64748b;">Hiện chưa có bài thi cho kỹ năng này.</p>';
+                return;
+            }
+
+            filteredTests.forEach(test => {
                 const card = document.createElement('div');
                 card.className = 'test-card';
                 
@@ -109,7 +140,7 @@
                 isLoggedIn = false;
                 loginBtn.style.display = 'inline-block';
                 logoutBtn.style.display = 'none';
-                welcomeMsg.innerHTML = 'Vui lòng đăng nhập để xem và làm bài nhé!';
+                welcomeMsg.innerHTML = 'Vui lòng đăng nhập để xem và làm bài!';
             }
             if (testListData.length > 0) {
                 renderTests();
