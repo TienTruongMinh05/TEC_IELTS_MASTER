@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TEC IELTS Speaking Random Mock Test</title>
+<style>
+:root{--blue:#2AA9D9;--teal:#2E6175;--aqua:#CFEFF8;--mist:#F5FAFC;--ink:#183849;--red:#c1121f;--green:#17864b}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--mist);color:#1f2937}
+header{background:white;border-bottom:4px solid var(--blue);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 12px #0001}
+.brand{display:flex;gap:12px;align-items:center} .logo{width:64px;height:64px;border-radius:16px;background:linear-gradient(145deg,var(--blue),var(--teal));display:grid;place-items:center;color:white;font-size:23px;font-weight:900}
+h1{margin:0;color:var(--teal);font-size:24px} .sub{color:#64748b;font-size:13px;margin-top:4px}
+.clock{font-size:28px;font-weight:900;color:var(--red)}
+.wrap{max-width:1250px;margin:auto;padding:16px}
+.panel{background:white;border-radius:18px;padding:16px;box-shadow:0 3px 16px #00000012;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:1.4fr .8fr;gap:14px}
+.controls{display:grid;grid-template-columns:1fr .7fr auto;gap:10px;align-items:end}
+label{font-weight:800;color:var(--ink);display:block;margin-bottom:6px}
+input,select,button{font-size:15px;border-radius:10px;padding:11px;border:1px solid #cbd5e1;width:100%}
+button{border:0;background:var(--teal);color:white;font-weight:800;cursor:pointer}
+button.light{background:#e8f6fb;color:var(--teal)} button.red{background:var(--red)} button:disabled{opacity:.55;cursor:not-allowed}
+.stage{border:1px solid #d7e2e8;border-radius:16px;padding:22px;min-height:460px;background:linear-gradient(180deg,#fff,#fbfeff)}
+.partBadge{display:inline-block;background:var(--aqua);color:var(--teal);font-weight:900;padding:7px 12px;border-radius:999px}
+.question{font-size:27px;line-height:1.35;color:var(--ink);margin:24px 0}
+.cue{border:2px solid var(--teal);padding:18px;border-radius:14px;background:#fff} .cue h2{margin-top:0;color:var(--teal)} .cue li{margin:10px 0}
+.status{padding:12px;border-radius:12px;background:#f1f5f9;color:#475569;margin:12px 0}
+.timerBig{font-size:52px;font-weight:900;color:var(--teal);text-align:center;margin:15px}
+.wave{height:70px;display:flex;align-items:center;justify-content:center;gap:5px}
+.wave span{display:block;width:6px;height:12px;background:var(--blue);border-radius:5px}
+.recording .wave span{animation:pulse 1s infinite ease-in-out}
+.recording .wave span:nth-child(2){animation-delay:.15s} .recording .wave span:nth-child(3){animation-delay:.3s} .recording .wave span:nth-child(4){animation-delay:.45s} .recording .wave span:nth-child(5){animation-delay:.6s}
+@keyframes pulse{0%,100%{height:12px}50%{height:55px}}
+.side h3{color:var(--teal)} .progress{height:12px;background:#e2e8f0;border-radius:999px;overflow:hidden} .bar{height:100%;background:var(--blue);width:0}
+.log{max-height:300px;overflow:auto;font-size:13px;border:1px solid #e2e8f0;border-radius:10px;padding:10px;background:#fafafa}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px} .row button{width:auto;flex:1}
+.notice{font-size:13px;background:#fff7ed;border:1px solid #fdba74;color:#9a3412;padding:10px;border-radius:10px}
+@media(max-width:850px){.grid,.controls{grid-template-columns:1fr} header{display:block} .clock{margin-top:10px} .question{font-size:22px}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand"><div class="logo">TEC</div><div><h1>IELTS Speaking Random Mock Test</h1><div class="sub">Được thực hiện bởi thầy Kiệt - 0333 762 756</div></div></div>
+<div><div class="clock" id="totalClock">00:00</div><div class="sub">Total test time</div></div>
+</header>
+
+<div class="wrap">
+<div class="panel controls">
+<div><label>Student name</label><input id="studentName" placeholder="Enter your full name"></div>
+<div><label>AI voice</label><select id="voiceSelect"></select></div>
+<button id="newTestBtn" onclick="generateTest()">🎲 Random new test</button>
+</div>
+
+<div class="notice panel"><strong>Microphone permission is required.</strong> The browser AI voice reads each question. Your answers are recorded into one audio file. Chrome or Edge on a laptop is recommended.</div>
+
+<div class="grid">
+<div class="panel stage" id="stage">
+<span class="partBadge" id="partBadge">Ready</span>
+<div id="content"><div class="question">Enter the student name, then click <strong>Start test</strong>.</div></div>
+<div class="timerBig" id="answerTimer">--:--</div>
+<div id="recordVisual"><div class="wave"><span></span><span></span><span></span><span></span><span></span></div></div>
+<div class="status" id="status">A random Part 1, Part 2 and Part 3 test has been prepared.</div>
+<div class="row">
+<button id="startBtn" onclick="startTest()">🎙 Start test</button>
+<button class="light" id="nextBtn" onclick="finishCurrentEarly()" disabled>Next / Finish answer</button>
+<button class="red" id="stopBtn" onclick="stopTest()" disabled>Stop test</button>
+</div>
+</div>
+
+<div class="panel side">
+<h3>Test progress</h3>
+<div class="progress"><div class="bar" id="progressBar"></div></div>
+<p><strong id="progressText">0 / 11 prompts</strong></p>
+<h3>Selected test</h3>
+<div id="testPreview" class="log"></div>
+<div class="row">
+<button class="light" id="downloadAudioBtn" onclick="downloadAudio()" disabled>Download audio</button>
+<button class="light" id="downloadReportBtn" onclick="downloadReport()" disabled>Download report</button>
+</div>
+<div class="row">
+<button class="light" onclick="replayQuestion()">🔊 Repeat question</button>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+const PART1={"Watch": ["Do you wear a watch?", "Have you ever got a watch as a gift?", "Why do some people wear expensive watches?", "Do you think it is important to wear a watch? Why?"], "Cars": ["Do you think car colours are important?", "Did you enjoy travelling by car when you were a kid?", "What types of cars do you like?", "Do you prefer to be a driver or a passenger?", "What do you usually do when there is a traffic jam?"], "Websites": ["What kinds of websites do you often visit?", "What is your favourite website?", "Are there any changes to the websites you often visit?", "What kinds of websites are popular in your country?"], "Public gardens and parks": ["Did you like going to parks as a child?", "Do you still like going to parks now?", "Would you like to see more parks in your city?", "What do you like to do when visiting a park?"], "Shopping": ["How often do you go shopping?", "Do you prefer online shopping or in-store shopping?", "Have you ever returned anything you bought online?", "Do you like shopping?"], "Teachers": ["Do you have a favourite teacher?", "In what way has your favourite teacher helped you?", "Are you still in touch with your primary school teachers?", "Do you want to be a teacher in the future?"], "Social media": ["Have you ever posted anything on social media?", "When did you start using social media?", "Do you think you spend too much time on social media?", "What do people often do on social media?"], "Films and cinemas": ["How often do you watch films?", "Do you prefer to watch films at home or in the cinema?", "What films do you like?", "Do you think going to the cinema is a good way to spend time with friends?"], "Science": ["Do you like science?", "When did you start to learn about science?", "Which science subject is interesting to you?", "Do you like watching science TV programmes?"], "Reading": ["Do you like reading?", "Do you prefer to read on paper or on a screen?", "When do you need to read carefully?", "Do you prefer scanning or detailed reading?"], "Walking": ["Do you walk a lot?", "Did you often go outside for a walk when you were a child?", "Why do people like to walk in parks?", "Where would you like to take a long walk?"], "Food": ["What is your favourite food?", "What kind of food did you like when you were young?", "Has your favourite food changed since you were a child?", "Do you eat different foods at different times of the year?"], "Hometown": ["Is your hometown a big city or a small place?", "Do you like your hometown?", "What do you like most about your hometown?", "What is your hometown famous for?"], "Home and accommodation": ["Who do you live with?", "Do you live in an apartment or a house?", "What part of your home do you like the most?", "What kind of home would you like to live in in the future?"], "Work or studies": ["What subjects are you studying, or what work do you do?", "Why did you choose that subject or job?", "What technology do you use for your work or studies?", "What plans do you have for the next five years?"]};
+const PART2=[{"title": "Describe a change that you made recently", "bullets": ["What the change was", "What caused the change", "What you did for the change", "And explain how you feel about the change"], "part3": ["Do you think it is good to change one's daily routine?", "Do you think it is good to change jobs?", "Who changes routines more, young people or older people?", "Why do people sometimes resist change?"]}, {"title": "Describe a long-term goal or ambition you would like to achieve", "bullets": ["How long you have had this goal", "What it is", "How you will achieve it", "And explain why you set it"], "part3": ["Why should children have ambitions?", "Is it good for a person to be ambitious?", "Should parents support their children's ambitions?", "Can ambition ever have negative effects?"]}, {"title": "Describe a time when you were stuck in a traffic jam for a very long time", "bullets": ["When it happened", "Where you were stuck", "What you did while waiting", "And explain how you felt"], "part3": ["Do you like using public transport?", "How can cities reduce traffic congestion?", "Can better public transport solve traffic problems?", "What are effective ways to manage traffic?"]}, {"title": "Describe a time when you organised a happy event successfully", "bullets": ["What the event was", "How you prepared for it", "Who helped you organise it", "And explain why it was successful"], "part3": ["When do people need to be well organised?", "Does every event need detailed preparation?", "How can parents teach children to be organised?", "Why do people need help when organising large events?"]}, {"title": "Describe a time when you had a problem using an electronic device", "bullets": ["When it happened", "Where it happened", "What the problem was", "And explain how you solved it"], "part3": ["Why do people like buying new electronic devices?", "What impact do electronic devices have on people?", "Should children have limits on device use?", "How can people become less dependent on technology?"]}, {"title": "Describe a place you have travelled to that you would recommend to others", "bullets": ["What it is", "Where it is", "What you saw and did there", "And explain why you recommend it"], "part3": ["Where do people in your country often go for holidays?", "What is the ideal length of a holiday?", "How do people usually plan holidays?", "Is careful planning always necessary?"]}, {"title": "Describe a live sports event you watched and liked", "bullets": ["What it was", "When and where you watched it", "Who you watched it with", "And explain why you liked it"], "part3": ["Why do people like watching sports events?", "Where do people normally watch sports?", "What are the advantages of watching sports online?", "Should children attend live sports matches?"]}, {"title": "Describe a time when you worked in a group", "bullets": ["What you did", "Who you worked with", "What problems you faced", "And explain why you worked in the group"], "part3": ["Why do some people prefer working alone?", "What should a good team leader do?", "Should students learn to do group work?", "What problems commonly occur in teams?"]}, {"title": "Describe an important decision that you made", "bullets": ["What the decision was", "How you made the decision", "What the result was", "And explain why it was important"], "part3": ["What important decisions do teenagers need to make?", "Who can young people ask for help?", "Can advertisements influence decisions?", "How do people usually make major decisions?"]}, {"title": "Describe a thing you did to learn another language", "bullets": ["What language you learned", "What you did", "How it helped you", "And explain how you felt about it"], "part3": ["What difficulties do people face when learning a language?", "Is technology making language learning unnecessary?", "Is it better to learn alone or in a group?", "What is the best way to learn a language?"]}, {"title": "Describe a person who often helps others", "bullets": ["Who this person is", "How often the person helps others", "How and why the person helps", "And explain how you feel about this person"], "part3": ["Why are some people reluctant to ask for help?", "What can children do to help their parents?", "Who should people ask for help at work?", "Should schools teach children to help others?"]}, {"title": "Describe a piece of technology, not a phone, that you would like to own", "bullets": ["What it is", "How much it costs", "How you learned about it", "And explain why you want it"], "part3": ["How is modern technology different from technology in the past?", "What technology do young people like to use?", "Has technology changed communication?", "What negative effects can technology have on relationships?"]}, {"title": "Describe a perfect job you would like to have in the future", "bullets": ["What it is", "How you learned about it", "What you need to learn to get it", "And explain why it is perfect for you"], "part3": ["What can be called a dream job?", "Do people's ideal jobs change as they grow older?", "What should people consider when choosing a career?", "Is salary the main reason people choose a job?"]}, {"title": "Describe a movie you watched and enjoyed recently", "bullets": ["When and where you watched it", "Who you watched it with", "What it was about", "And explain why you enjoyed it"], "part3": ["What makes a movie successful?", "Do people prefer domestic or foreign films?", "Do successful films need famous actors?", "Why do people still go to cinemas?"]}, {"title": "Describe a time when you needed to use your imagination", "bullets": ["When it was", "Why you needed imagination", "How easy or difficult it was", "And explain how you felt"], "part3": ["Can adults still have strong imaginations?", "Is imagination important for scientists?", "What jobs need imagination?", "How can schools develop children's imagination?"]}];
+let selectedTest=null, prompts=[], index=0, mediaRecorder=null, stream=null, chunks=[], audioBlob=null;
+let countdown=null, elapsedInterval=null, totalSeconds=0, currentQuestionText="", answerStartedAt=null;
+let stageLog=[];
+
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function pick(a,n=1){return shuffle(a).slice(0,n)}
+
+function generateTest(){
+  if(mediaRecorder && mediaRecorder.state!=="inactive") return alert("Stop the current test before generating a new one.");
+  const topics=pick(Object.keys(PART1),2);
+  const p1Questions=[...pick(PART1[topics[0]],3),...pick(PART1[topics[1]],2)];
+  const cue=pick(PART2,1)[0];
+  selectedTest={topics,p1Questions,cue};
+  buildPrompts();
+  renderPreview();
+  resetUI();
+}
+
+function buildPrompts(){
+  prompts=[];
+  selectedTest.p1Questions.forEach(q=>prompts.push({part:"Part 1",type:"answer",text:q,duration:30}));
+  prompts.push({part:"Part 2",type:"prep",text:selectedTest.cue.title,bullets:selectedTest.cue.bullets,duration:60});
+  prompts.push({part:"Part 2",type:"answer2",text:"You can begin speaking now.",duration:120});
+  selectedTest.cue.part3.forEach(q=>prompts.push({part:"Part 3",type:"answer",text:q,duration:45}));
+}
+
+function renderPreview(){
+  testPreview.innerHTML=`<b>Part 1 topics:</b> ${selectedTest.topics.join(" & ")}<br><br>
+  <b>Part 2:</b> ${selectedTest.cue.title}<br><br>
+  <b>Part 3:</b><br>${selectedTest.cue.part3.map(x=>"• "+x).join("<br>")}`;
+  progressText.textContent=`0 / ${prompts.length} prompts`;
+}
+
+function resetUI(){
+  index=0; chunks=[]; audioBlob=null; totalSeconds=0; stageLog=[];
+  clearInterval(countdown);clearInterval(elapsedInterval);
+  totalClock.textContent="00:00"; answerTimer.textContent="--:--";
+  progressBar.style.width="0%"; downloadAudioBtn.disabled=true;downloadReportBtn.disabled=true;
+  startBtn.disabled=false;nextBtn.disabled=true;stopBtn.disabled=true;
+  partBadge.textContent="Ready";status.textContent="Random test ready.";
+  content.innerHTML='<div class="question">Click <strong>Start test</strong> when you are ready.</div>';
+  recordVisual.classList.remove("recording");
+}
+
+async function startTest(){
+  if(!studentName.value.trim()) return alert("Please enter the student's name.");
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    const mime=MediaRecorder.isTypeSupported("audio/webm;codecs=opus")?"audio/webm;codecs=opus":"audio/webm";
+    mediaRecorder=new MediaRecorder(stream,{mimeType:mime});
+    mediaRecorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+    mediaRecorder.onstop=()=>{
+      audioBlob=new Blob(chunks,{type:mediaRecorder.mimeType||"audio/webm"});
+      downloadAudioBtn.disabled=false;downloadReportBtn.disabled=false;
+      status.textContent="Test completed. Download the audio and report to send to your teacher.";
+      stream.getTracks().forEach(t=>t.stop());
+    };
+    mediaRecorder.start();
+    mediaRecorder.pause();
+    startBtn.disabled=true;nextBtn.disabled=false;stopBtn.disabled=false;newTestBtn.disabled=true;
+    elapsedInterval=setInterval(()=>{totalSeconds++;totalClock.textContent=formatTime(totalSeconds)},1000);
+    index=0; runPrompt();
+  }catch(err){
+    alert("Microphone access failed. Please allow microphone permission and use Chrome or Edge.");
+  }
+}
+
+function runPrompt(){
+  if(index>=prompts.length) return stopTest();
+  const p=prompts[index];
+  partBadge.textContent=p.part;
+  progressText.textContent=`${index+1} / ${prompts.length} prompts`;
+  progressBar.style.width=((index)/prompts.length*100)+"%";
+  currentQuestionText=p.text;
+  recordVisual.classList.remove("recording");
+  if(mediaRecorder && mediaRecorder.state==="recording") mediaRecorder.pause();
+
+  if(p.type==="prep"){
+    content.innerHTML=`<div class="cue"><h2>${p.text}</h2><p>You should say:</p><ul>${p.bullets.map(b=>`<li>${b}</li>`).join("")}</ul></div>`;
+    status.textContent="The examiner is reading the cue card. Then you will have one minute to prepare.";
+    speak(`${p.text}. You should say: ${p.bullets.join(". ")}. You now have one minute to prepare.`,()=>startCountdown(p.duration,false));
+  }else if(p.type==="answer2"){
+    content.innerHTML=`<div class="cue"><h2>${selectedTest.cue.title}</h2><ul>${selectedTest.cue.bullets.map(b=>`<li>${b}</li>`).join("")}</ul></div>`;
+    status.textContent="Part 2 answer time: up to two minutes.";
+    speak("You can begin speaking now.",()=>startCountdown(p.duration,true));
+  }else{
+    content.innerHTML=`<div class="question">${p.text}</div>`;
+    status.textContent="Listen to the question. Recording starts after the AI voice finishes.";
+    speak(p.text,()=>startCountdown(p.duration,true));
+  }
+}
+
+function startCountdown(seconds,record){
+  let left=seconds;
+  answerTimer.textContent=formatTime(left);
+  answerStartedAt=Date.now();
+  if(record && mediaRecorder){
+    if(mediaRecorder.state==="paused")mediaRecorder.resume();
+    recordVisual.classList.add("recording");
+    status.textContent="Recording your answer…";
+  }else{
+    status.textContent="Preparation time…";
+  }
+  clearInterval(countdown);
+  countdown=setInterval(()=>{
+    left--;answerTimer.textContent=formatTime(left);
+    if(left<=0){clearInterval(countdown);completePrompt();}
+  },1000);
+}
+
+function completePrompt(){
+  clearInterval(countdown);
+  if(mediaRecorder && mediaRecorder.state==="recording")mediaRecorder.pause();
+  recordVisual.classList.remove("recording");
+  stageLog.push({part:prompts[index].part,prompt:prompts[index].text,seconds:Math.max(0,Math.round((Date.now()-answerStartedAt)/1000))});
+  index++;
+  setTimeout(runPrompt,500);
+}
+
+function finishCurrentEarly(){
+  if(!mediaRecorder || mediaRecorder.state==="inactive")return;
+  completePrompt();
+}
+
+function stopTest(){
+  clearInterval(countdown);clearInterval(elapsedInterval);
+  speechSynthesis.cancel();
+  if(mediaRecorder && mediaRecorder.state!=="inactive"){
+    if(mediaRecorder.state==="paused")mediaRecorder.resume();
+    setTimeout(()=>mediaRecorder.stop(),100);
+  }
+  progressBar.style.width="100%";
+  partBadge.textContent="Finished";
+  answerTimer.textContent="00:00";
+  recordVisual.classList.remove("recording");
+  nextBtn.disabled=true;stopBtn.disabled=true;newTestBtn.disabled=false;
+  content.innerHTML='<div class="question">Speaking test completed.</div>';
+}
+
+function speak(text,onend){
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  const voices=speechSynthesis.getVoices();
+  const selected=voices.find(v=>v.name===voiceSelect.value)||voices.find(v=>v.lang.startsWith("en-GB"))||voices.find(v=>v.lang.startsWith("en"))||voices[0];
+  if(selected)u.voice=selected;
+  u.lang=selected?.lang||"en-GB";u.rate=0.92;u.pitch=1;
+  u.onend=()=>onend&&onend();
+  u.onerror=()=>onend&&onend();
+  speechSynthesis.speak(u);
+}
+
+function loadVoices(){
+  const voices=speechSynthesis.getVoices().filter(v=>v.lang.startsWith("en"));
+  voiceSelect.innerHTML=voices.map(v=>`<option value="${v.name}">${v.name} (${v.lang})</option>`).join("");
+  const preferred=voices.find(v=>v.lang==="en-GB")||voices[0];
+  if(preferred)voiceSelect.value=preferred.name;
+}
+speechSynthesis.onvoiceschanged=loadVoices;loadVoices();
+
+function replayQuestion(){
+  if(currentQuestionText)speak(currentQuestionText);
+}
+
+function downloadAudio(){
+  if(!audioBlob)return;
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(audioBlob);
+  a.download=safeName(studentName.value)+"_TEC_Speaking_Mock_Test.webm";
+  a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+function downloadReport(){
+  if(!selectedTest)return;
+  const lines=[
+    "TEC IELTS Speaking Random Mock Test",
+    "Student: "+studentName.value,
+    "Date: "+new Date().toLocaleString(),
+    "Total time: "+formatTime(totalSeconds),
+    "",
+    "PART 1",
+    ...selectedTest.p1Questions.map((q,i)=>`${i+1}. ${q}`),
+    "",
+    "PART 2",
+    selectedTest.cue.title,
+    ...selectedTest.cue.bullets.map(x=>"• "+x),
+    "",
+    "PART 3",
+    ...selectedTest.cue.part3.map((q,i)=>`${i+1}. ${q}`),
+    "",
+    "Recorded-answer timings",
+    ...stageLog.map(x=>`${x.part} | ${x.seconds}s | ${x.prompt}`)
+  ];
+  const blob=new Blob([lines.join("\n")],{type:"text/plain;charset=utf-8"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download=safeName(studentName.value)+"_TEC_Speaking_Mock_Test_Report.txt";a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+function safeName(s){return (s||"Student").replace(/[^a-z0-9]+/gi,"_")}
+function formatTime(s){s=Math.max(0,Math.floor(s));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+
+generateTest();
+</script>
+</body>
+</html>
