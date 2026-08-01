@@ -1,4 +1,16 @@
 [
+        {
+        "id": "W1",
+        "title": "TEC IELTS Writing Mock Test 1",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Writing_All_Topics.html"
+    },
+        {
+        "id": "S1",
+        "title": "TEC IELTS Speaking Mock Test 1",
+        "subtitle": "Được thực hiện bởi thầy Kiệt",
+        "url": "tests/TEC_IELTS_Speaking_Random_Mock_Test.html"
+    },
     {
         "id": "L1",
         "title": "TEC IELTS Listening Mock Test 1",
