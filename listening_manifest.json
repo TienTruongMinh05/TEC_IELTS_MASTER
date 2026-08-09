@@ -5,7 +5,7 @@
     {
       "id": "L1",
       "title": "TEC IELTS Listening Mock Test 1",
-      "available": false,
+      "available": true,
       "sections": [
         { "number": 1, "label": "Section 1", "objectPath": "tests/L01/section-01.mp3" },
         { "number": 2, "label": "Section 2", "objectPath": "tests/L01/section-02.mp3" },

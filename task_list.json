@@ -16,7 +16,7 @@
         "title": "TEC IELTS Listening Mock Test 1",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
         "url": "tests/TEC_IELTS_Listening_Player.html?test=L1",
-        "available": false
+        "available": true
     },
     {
         "id": "L2",
