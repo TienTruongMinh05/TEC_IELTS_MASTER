@@ -18,6 +18,8 @@ const testGrid = document.getElementById('test-grid');
 let isLoggedIn = false;
 let testListData = [];
 let currentSkill = 'R';
+let pendingAuthMessage = sessionStorage.getItem('tec_auth_message');
+sessionStorage.removeItem('tec_auth_message');
 
 async function loadTestList() {
     try {
@@ -72,7 +74,12 @@ function renderTests() {
         details.append(title, subtitle);
         card.appendChild(details);
 
-        if (isLoggedIn) {
+        if (test.available === false) {
+            const unavailableMessage = document.createElement('div');
+            unavailableMessage.className = 'unavailable-msg';
+            unavailableMessage.textContent = 'Đang cập nhật audio';
+            card.appendChild(unavailableMessage);
+        } else if (isLoggedIn) {
             const startButton = document.createElement('button');
             startButton.className = 'do-test-btn';
             startButton.style.display = 'block';
@@ -109,7 +116,8 @@ function applySession(session) {
         name.textContent = displayNameFor(user);
         welcomeMsg.append(name, ' quay trở lại!');
     } else {
-        welcomeMsg.textContent = 'Vui lòng đăng nhập để xem và làm bài!';
+        welcomeMsg.textContent = pendingAuthMessage || 'Vui lòng đăng nhập để xem và làm bài!';
+        pendingAuthMessage = null;
     }
 
     if (testListData.length > 0) renderTests();
