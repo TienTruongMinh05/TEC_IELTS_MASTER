@@ -44,17 +44,24 @@ for (let testNumber = 1; testNumber <= 7; testNumber += 1) {
 
 assert.equal(seenPaths.size, 28, 'Expected 28 unique section paths');
 
+const indexHtml = readText('index.html');
+const homeScript = readText('script.js');
 const playerHtml = readText('tests/TEC_IELTS_Listening_Player.html');
+const playerScript = readText('tests/listening-player.js');
+assert.doesNotMatch(indexHtml, /login-btn|logout-btn|supabase-config/);
+assert.doesNotMatch(homeScript, /signInWithOAuth|getSession|onAuthStateChange/);
 assert.match(playerHtml, /@supabase\/supabase-js@2\.112\.2/);
 assert.match(playerHtml, /listening-player\.js/);
+assert.match(playerScript, /getPublicUrl/);
+assert.doesNotMatch(playerScript, /createSignedUrl|getSession|onAuthStateChange/);
 
 const migrationDir = new URL('supabase/migrations/', root);
-const migrationFile = readdirSync(migrationDir).find(name => name.endsWith('_create_listening_storage.sql'));
-assert.ok(migrationFile, 'Listening Storage migration is missing');
-const migration = readFileSync(join(fileURLToPath(migrationDir), migrationFile), 'utf8');
-assert.match(migration, /'ielts-listening'/);
-assert.match(migration, /52428800/);
-assert.match(migration, /to authenticated/);
-assert.match(migration, /bucket_id = 'ielts-listening'/);
+const publicMigrationFile = readdirSync(migrationDir).find(name => name.endsWith('_make_listening_storage_public.sql'));
+assert.ok(publicMigrationFile, 'Public Listening Storage migration is missing');
+const publicMigration = readFileSync(join(fileURLToPath(migrationDir), publicMigrationFile), 'utf8');
+assert.match(publicMigration, /'ielts-listening'/);
+assert.match(publicMigration, /52428800/);
+assert.match(publicMigration, /\btrue\b/);
+assert.match(publicMigration, /drop policy if exists "Authenticated users can listen to IELTS audio"/);
 
-console.log('Listening validation passed: 7 tests, 28 private audio sections.');
+console.log('Listening validation passed: 7 tests, 28 public audio sections.');

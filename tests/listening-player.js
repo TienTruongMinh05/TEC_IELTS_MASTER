@@ -9,9 +9,7 @@ const supabaseClient = hasSupabaseConfig
     ? window.supabase.createClient(config.url, config.publishableKey)
     : null;
 
-const SIGNED_URL_TTL_SECONDS = 7200;
 const VALID_TEST_ID = /^L[1-7]$/;
-
 const audioPlayer = document.getElementById('audio-player');
 const continueButton = document.getElementById('continue-btn');
 const sectionButtons = document.getElementById('section-buttons');
@@ -25,37 +23,10 @@ let selectedTest = null;
 let currentSectionIndex = -1;
 let retryUsedForSection = false;
 let requestedResumeTime = 0;
-const signedUrlCache = new Map();
 
 function setStatus(message, isError = false) {
     statusMessage.textContent = message;
     statusMessage.classList.toggle('error', isError);
-}
-
-function stopAudio() {
-    audioPlayer.pause();
-    audioPlayer.removeAttribute('src');
-    audioPlayer.load();
-}
-
-function returnToLogin(message) {
-    stopAudio();
-    sessionStorage.setItem('tec_auth_message', message);
-    window.location.replace('../index.html');
-}
-
-async function requireSession() {
-    if (!supabaseClient) {
-        throw new Error('Supabase chưa được cấu hình. Vui lòng xem README.');
-    }
-
-    const { data, error } = await supabaseClient.auth.getSession();
-    if (error) throw error;
-    if (!data.session) {
-        returnToLogin('Vui lòng đăng nhập để nghe bài Listening.');
-        return null;
-    }
-    return data.session;
 }
 
 async function loadManifest() {
@@ -94,39 +65,31 @@ function updateSectionUI(index) {
     });
 }
 
-async function signedUrlFor(index, forceRefresh = false) {
-    if (!forceRefresh && signedUrlCache.has(index)) return signedUrlCache.get(index);
-
+function publicUrlFor(index, cacheBust = false) {
     const section = selectedTest.sections[index];
-    const { data, error } = await supabaseClient.storage
-        .from(manifest.bucket)
-        .createSignedUrl(section.objectPath, SIGNED_URL_TTL_SECONDS);
+    const { data } = supabaseClient.storage.from(manifest.bucket).getPublicUrl(section.objectPath);
+    if (!data?.publicUrl) throw new Error(`Không tạo được URL cho ${section.label}.`);
 
-    if (error) throw error;
-    if (!data?.signedUrl) throw new Error(`Không tạo được URL cho ${section.label}.`);
-    signedUrlCache.set(index, data.signedUrl);
-    return data.signedUrl;
+    if (!cacheBust) return data.publicUrl;
+    const refreshedUrl = new URL(data.publicUrl);
+    refreshedUrl.searchParams.set('retry', Date.now().toString());
+    return refreshedUrl.href;
 }
 
 async function loadSection(index, autoplay, options = {}) {
     if (index < 0 || index >= selectedTest.sections.length) return;
 
-    const resumeTime = options.resumeTime || 0;
     currentSectionIndex = index;
     retryUsedForSection = Boolean(options.isRetry);
-    requestedResumeTime = resumeTime;
+    requestedResumeTime = options.resumeTime || 0;
     continueButton.style.display = 'none';
     audioPlayer.dataset.autoplay = autoplay ? 'true' : 'false';
     updateSectionUI(index);
-    setStatus(`Đang tạo đường dẫn bảo mật cho ${selectedTest.sections[index].label}...`);
+    setStatus(`Đang tải ${selectedTest.sections[index].label}...`);
 
     try {
-        const signedUrl = await signedUrlFor(index, Boolean(options.forceRefresh));
-        audioPlayer.src = signedUrl;
+        audioPlayer.src = publicUrlFor(index, Boolean(options.cacheBust));
         audioPlayer.load();
-        if (index + 1 < selectedTest.sections.length) {
-            signedUrlFor(index + 1).catch(() => {});
-        }
     } catch (error) {
         setStatus(`Không thể tải audio: ${error.message}`, true);
     }
@@ -151,17 +114,14 @@ async function playLoadedAudio() {
 
 async function recoverFromAudioError() {
     if (currentSectionIndex < 0 || retryUsedForSection) {
-        setStatus('Không thể phát audio. Vui lòng tải lại trang hoặc báo cho giáo viên.', true);
+        setStatus('Không thể phát audio. Kiểm tra file đã được upload đúng đường dẫn trong manifest.', true);
         return;
     }
 
     const resumeTime = Number.isFinite(audioPlayer.currentTime) ? audioPlayer.currentTime : 0;
-    signedUrlCache.delete(currentSectionIndex);
-    const session = await requireSession();
-    if (!session) return;
-    setStatus('Đường dẫn audio đã hết hạn hoặc bị gián đoạn. Đang kết nối lại...');
+    setStatus('Kết nối audio bị gián đoạn. Đang thử tải lại...');
     await loadSection(currentSectionIndex, true, {
-        forceRefresh: true,
+        cacheBust: true,
         isRetry: true,
         resumeTime
     });
@@ -169,8 +129,9 @@ async function recoverFromAudioError() {
 
 async function initialize() {
     try {
-        const session = await requireSession();
-        if (!session) return;
+        if (!supabaseClient) {
+            throw new Error('Supabase chưa được cấu hình. Vui lòng xem README.');
+        }
 
         manifest = await loadManifest();
         const testId = requestedTestId();
@@ -188,10 +149,6 @@ async function initialize() {
         testTitle.textContent = selectedTest.title;
         renderSectionButtons();
         await loadSection(0, false);
-
-        supabaseClient.auth.onAuthStateChange(event => {
-            if (event === 'SIGNED_OUT') returnToLogin('Phiên đăng nhập đã kết thúc.');
-        });
     } catch (error) {
         audioPlayer.hidden = true;
         setStatus(error.message, true);

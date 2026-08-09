@@ -23,9 +23,8 @@
         .section-buttons { display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); margin-top: 18px; }
         .section-button { background: #e8f6fb; border: 0; border-radius: 10px; color: var(--teal); cursor: pointer; font-weight: 800; padding: 11px 8px; }
         .section-button.active { background: var(--teal); color: white; }
-        .section-button:disabled { cursor: not-allowed; opacity: .55; }
         #continue-btn { background: var(--blue); border: 0; border-radius: 10px; color: white; cursor: pointer; display: none; font-weight: 800; margin-top: 14px; padding: 11px 16px; width: 100%; }
-        .notice { background: #fff7ed; border: 1px solid #fdba74; border-radius: 12px; color: #9a3412; line-height: 1.5; padding: 14px; }
+        .notice { background: #ecfeff; border: 1px solid #67e8f9; border-radius: 12px; color: #155e75; line-height: 1.5; padding: 14px; }
         @media (max-width: 600px) {
             .header-inner { align-items: flex-start; flex-direction: column; }
             .section-buttons { grid-template-columns: repeat(2, 1fr); }
@@ -37,7 +36,7 @@
         <div class="header-inner">
             <div>
                 <h1 id="test-title">TEC IELTS Listening</h1>
-                <div class="subtitle">Audio được bảo vệ bởi phiên đăng nhập Supabase</div>
+                <div class="subtitle">Audio được phát trực tiếp từ Supabase Storage</div>
             </div>
             <a class="back-link" href="../index.html">← Trang chủ</a>
         </div>
@@ -49,13 +48,13 @@
                 <strong id="section-label">Đang chuẩn bị...</strong>
                 <span class="badge" id="section-progress">0 / 4</span>
             </div>
-            <p id="status" role="status" aria-live="polite">Đang kiểm tra phiên đăng nhập...</p>
+            <p id="status" role="status" aria-live="polite">Đang tải thông tin bài nghe...</p>
             <audio id="audio-player" controls preload="metadata"></audio>
             <button id="continue-btn" type="button">Tiếp tục section kế tiếp</button>
             <div class="section-buttons" id="section-buttons" aria-label="Chọn section"></div>
         </section>
 
-        <p class="notice">Mỗi signed URL có hiệu lực tối đa 2 giờ. Nếu phiên đăng nhập hết hạn, hệ thống sẽ yêu cầu đăng nhập lại.</p>
+        <p class="notice">Không cần đăng nhập. Audio của bài đã được bật có thể nghe trực tiếp trên trình duyệt.</p>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.2/dist/umd/supabase.js"></script>
