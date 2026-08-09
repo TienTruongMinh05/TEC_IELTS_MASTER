@@ -1,6 +1,6 @@
 # TEC IELTS MASTER
 
-Nền tảng luyện thi IELTS chạy trên GitHub Pages. Audio Listening được cung cấp công khai qua Supabase Storage; người học không cần đăng nhập.
+Nền tảng luyện thi IELTS chạy trên GitHub Pages. Google Login dùng Firebase Auth cũ; audio Listening được cung cấp công khai qua Supabase Storage.
 
 ## Chạy local
 
@@ -38,6 +38,12 @@ npx supabase@2.113.0 db push
 ```
 
 Public bucket cho phép mọi người nghe audio nếu có URL. Browser không có policy upload, update hoặc delete; audio chỉ được quản trị qua Dashboard hoặc công cụ server-side an toàn.
+
+## Firebase Google Login
+
+Trang chủ giữ nguyên Firebase project `tec-ielts-master` và Google popup login từ phiên bản gốc. Firebase Auth chỉ khóa/mở nút làm bài trên giao diện; Supabase Storage không phụ thuộc Firebase token.
+
+Khi deploy sang domain mới, chủ Firebase project phải thêm domain đó vào **Authentication → Settings → Authorized domains**. Nếu bạn không có quyền quản trị project Firebase cũ, login có thể chỉ hoạt động trên những domain đã được chủ project cho phép.
 
 ## Chuẩn bị audio Listening
 
@@ -96,7 +102,8 @@ git diff --check
 
 Ngoài kiểm tra tĩnh, cần xác minh thủ công:
 
-- Trang chủ không yêu cầu đăng nhập.
+- Firebase Google popup đăng nhập và đăng xuất hoạt động trên domain đã được cho phép.
+- Khi chưa đăng nhập, bài có sẵn hiển thị yêu cầu đăng nhập.
 - Public object URL trả audio và hỗ trợ byte-range/HTTP 206 để tua.
 - Section 1–4 phát đúng thứ tự và tự chuyển section.
 - Browser không thể upload, sửa hoặc xóa object bằng publishable key.

@@ -6,9 +6,11 @@
     <title>TEC IELTS - Trang chủ</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f7f6; color: #333; }
-        header { background: #4a90e2; color: white; padding: 15px 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        header { background: #4a90e2; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .logo { font-size: 24px; font-weight: bold; }
         button { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        #login-btn { background: #fff; color: #4a90e2; }
+        #logout-btn { background: #ff4757; color: #fff; display: none; }
         button:hover { opacity: 0.8; }
         .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
         .skill-selection { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
@@ -19,17 +21,22 @@
         .test-card h3 { margin-top: 0; color: #2c3e50; }
         .test-card p { color: #64748b; font-size: 14px; }
         .do-test-btn { background: #2ed573; color: white; margin-top: 15px; width: 100%; }
+        .lock-msg { color: #ff4757; font-size: 14px; margin-top: 15px; font-weight: bold; padding: 10px 0; }
         .unavailable-msg { background: #fff7ed; border-radius: 8px; color: #c2410c; font-size: 14px; font-weight: bold; margin-top: 15px; padding: 10px; }
     </style>
 </head>
 <body>
     <header>
         <div class="logo">TEC IELTS MASTER</div>
+        <div class="auth-section">
+            <button id="login-btn">Đăng nhập với Google</button>
+            <button id="logout-btn">Đăng xuất</button>
+        </div>
     </header>
 
     <div class="container">
         <h2>Danh sách đề thi IELTS</h2>
-        <p id="welcome-msg">Chọn kỹ năng và bắt đầu làm bài, không cần đăng nhập.</p>
+        <p id="welcome-msg">Vui lòng đăng nhập để bắt đầu làm bài.</p>
 
         <div class="skill-selection">
             <button class="skill-btn active" onclick="loadSkill('R', this)">READING</button>
@@ -43,6 +50,8 @@
         </div>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

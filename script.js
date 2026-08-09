@@ -1,5 +1,22 @@
+const firebaseConfig = Object.freeze({
+    apiKey: 'AIzaSyCf0kahngmflEKhf-GEENdAwMIGiAjl-Bg',
+    authDomain: 'tec-ielts-master.firebaseapp.com',
+    projectId: 'tec-ielts-master',
+    storageBucket: 'tec-ielts-master.firebasestorage.app',
+    messagingSenderId: '189299803974',
+    appId: '1:189299803974:web:18e450f31050761bc60747'
+});
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+const loginButton = document.getElementById('login-btn');
+const logoutButton = document.getElementById('logout-btn');
+const welcomeMessage = document.getElementById('welcome-msg');
 const testGrid = document.getElementById('test-grid');
 
+let isLoggedIn = false;
 let testListData = [];
 let currentSkill = 'R';
 
@@ -17,10 +34,10 @@ async function loadTestList() {
     }
 }
 
-function loadSkill(skillPrefix, btnElement) {
+function loadSkill(skillPrefix, buttonElement) {
     currentSkill = skillPrefix;
-    document.querySelectorAll('.skill-btn').forEach(btn => btn.classList.remove('active'));
-    if (btnElement) btnElement.classList.add('active');
+    document.querySelectorAll('.skill-btn').forEach(button => button.classList.remove('active'));
+    if (buttonElement) buttonElement.classList.add('active');
     renderTests();
 }
 
@@ -58,7 +75,7 @@ function renderTests() {
             unavailableMessage.className = 'unavailable-msg';
             unavailableMessage.textContent = 'Đang cập nhật audio';
             card.appendChild(unavailableMessage);
-        } else {
+        } else if (isLoggedIn) {
             const startButton = document.createElement('button');
             startButton.className = 'do-test-btn';
             startButton.textContent = 'Làm bài ngay';
@@ -66,10 +83,60 @@ function renderTests() {
                 window.location.href = test.url;
             });
             card.appendChild(startButton);
+        } else {
+            const lockMessage = document.createElement('div');
+            lockMessage.className = 'lock-msg';
+            lockMessage.textContent = 'Đăng nhập để làm bài';
+            card.appendChild(lockMessage);
         }
 
         testGrid.appendChild(card);
     });
 }
+
+function showAuthError(prefix, error) {
+    const detail = error?.message || 'Lỗi không xác định';
+    welcomeMessage.textContent = `${prefix}: ${detail}`;
+}
+
+loginButton.addEventListener('click', async () => {
+    loginButton.disabled = true;
+    try {
+        await auth.signInWithPopup(googleProvider);
+    } catch (error) {
+        showAuthError('Không thể đăng nhập', error);
+    } finally {
+        loginButton.disabled = false;
+    }
+});
+
+logoutButton.addEventListener('click', async () => {
+    logoutButton.disabled = true;
+    try {
+        await auth.signOut();
+    } catch (error) {
+        showAuthError('Không thể đăng xuất', error);
+    } finally {
+        logoutButton.disabled = false;
+    }
+});
+
+auth.onAuthStateChanged(user => {
+    isLoggedIn = Boolean(user);
+    loginButton.style.display = user ? 'none' : 'inline-block';
+    logoutButton.style.display = user ? 'inline-block' : 'none';
+
+    welcomeMessage.replaceChildren();
+    if (user) {
+        welcomeMessage.append('Chào mừng ');
+        const name = document.createElement('strong');
+        name.textContent = user.displayName || user.email || 'học viên';
+        welcomeMessage.append(name, ' quay trở lại!');
+    } else {
+        welcomeMessage.textContent = 'Vui lòng đăng nhập để xem và làm bài!';
+    }
+
+    if (testListData.length > 0) renderTests();
+});
 
 loadTestList();
