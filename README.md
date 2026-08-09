@@ -101,6 +101,7 @@ Các bài có `available: false` hiển thị **Đang cập nhật audio** và k
 ```powershell
 node --check script.js
 node --check tests/listening-player.js
+node tests/validate-listening.mjs
 Get-Content task_list.json -Raw | ConvertFrom-Json | Out-Null
 Get-Content listening_manifest.json -Raw | ConvertFrom-Json | Out-Null
 git diff --check
