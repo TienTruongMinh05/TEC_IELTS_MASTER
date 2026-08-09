@@ -1,4 +1,4 @@
 window.TEC_SUPABASE_CONFIG = Object.freeze({
-    url: 'https://YOUR_PROJECT_REF.supabase.co',
-    publishableKey: 'YOUR_SUPABASE_PUBLISHABLE_KEY'
+    url: 'https://kvtjrvlcgmitsmoshmed.supabase.co',
+    publishableKey: 'sb_publishable_-37Nmv_nKpNwsHHjh578aw_gCUdraAG'
 });
