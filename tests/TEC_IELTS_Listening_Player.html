@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đang mở bài Listening...</title>
+    <style>
+        body { background: #f5fafc; color: #17364a; font-family: Arial, sans-serif; margin: 0; }
+        main { background: white; border-radius: 16px; box-shadow: 0 2px 14px #0001; margin: 12vh auto; max-width: 560px; padding: 28px; text-align: center; }
+        a { color: #2e6175; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Đang mở bài Listening...</h1>
+        <p id="message">Vui lòng chờ trong giây lát.</p>
+        <p><a href="../index.html">← Quay lại trang chủ</a></p>
+    </main>
+    <script>
+        const id = new URLSearchParams(window.location.search).get('test') || '';
+        const match = /^L([1-7])$/.exec(id);
+        if (match) {
+            window.location.replace(`TEC_IELTS_Listening_Mock_Test_${match[1]}.html`);
+        } else {
+            document.getElementById('message').textContent = 'Mã bài Listening không hợp lệ.';
+        }
+    </script>
+</body>
+</html>

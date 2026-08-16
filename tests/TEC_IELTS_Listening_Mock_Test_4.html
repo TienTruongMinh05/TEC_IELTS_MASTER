@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TEC IELTS Listening Mock Test 4</title>
+<style>
+:root{--blue:#2AA9D9;--teal:#2E6175;--aqua:#CFEFF8;--mist:#F5FAFC;--ink:#17364a;--red:#c1121f;--green:#18864b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--mist);font-family:Arial,sans-serif;color:#1f2937}
+header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:4px solid var(--blue);box-shadow:0 2px 12px #0001;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:62px;height:62px;border-radius:16px;background:linear-gradient(145deg,var(--blue),var(--teal));display:grid;place-items:center;color:#fff;font-weight:900;font-size:22px;box-shadow:0 6px 18px #2aa9d944}
+h1{font-size:23px;margin:0;color:var(--teal)}
+.sub{font-size:13px;color:#64748b;margin-top:3px}
+.timer{font-size:28px;font-weight:900;color:var(--red);text-align:right}
+.wrap{max-width:1450px;margin:auto;padding:14px}
+.panel{background:#fff;border-radius:16px;box-shadow:0 2px 12px #00000012;padding:14px;margin-bottom:14px}
+.controls{display:grid;grid-template-columns:1.2fr .8fr auto auto;gap:10px;align-items:end}
+label{font-weight:700;color:var(--ink);display:block;margin-bottom:6px}
+input,button{font-size:15px;border-radius:10px;padding:10px;border:1px solid #cbd5e1;width:100%}
+button{border:0;background:var(--teal);color:#fff;font-weight:800;cursor:pointer}
+button.light{background:#e8f6fb;color:var(--teal)}
+button.red{background:var(--red)}
+button:disabled{opacity:.55;cursor:not-allowed}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{width:auto;padding:10px 16px;background:#e8f6fb;color:var(--teal)}
+.tab.active{background:var(--teal);color:#fff}
+.layout{display:grid;grid-template-columns:minmax(320px,1fr) minmax(260px,360px);gap:14px;align-items:start}
+.questionText{max-height:74vh;overflow:auto;border:1px solid #dbe3ea;border-radius:14px;background:#fff;padding:22px;line-height:1.65}
+.questionText h2{color:var(--teal);margin-top:0}
+.questionText h3{color:var(--teal)}
+.playerCard{border:1px solid #cfe3ec;border-radius:14px;padding:16px;background:linear-gradient(180deg,#f7fcfe,#eef8fb);margin-bottom:14px}
+.playerTitle{font-weight:900;color:var(--teal);margin-bottom:8px}
+.audioStatus{font-size:13px;color:#64748b;margin:8px 0}
+.progressOuter{height:12px;background:#dbe8ee;border-radius:999px;overflow:hidden}
+.progressInner{height:100%;background:var(--blue);width:0%}
+.timeRow{display:flex;justify-content:space-between;font-size:13px;color:#64748b;margin-top:6px}
+.playerButtons{display:flex;gap:8px;margin-top:12px}
+.playerButtons button{width:auto;flex:1}
+.formCard,.noteBox,.optionsBox{border:1px solid #94a3b8;border-radius:12px;padding:14px;margin:12px 0;background:#f8fafc}
+.formGrid{display:grid;grid-template-columns:minmax(180px,36%) 1fr;gap:10px 14px;align-items:center}
+.inlineAnswer input{display:inline-block;min-width:150px;width:150px;border:0;border-bottom:2px dotted #64748b;border-radius:0;padding:3px 5px;margin:0 4px;background:#fffdf2;text-align:center;font-weight:800;color:var(--ink)}
+.inlineAnswer.letter input{min-width:58px;width:58px;text-transform:uppercase}
+.inlineAnswer.correct input{background:#dcfce7;border-bottom-color:#22c55e}
+.inlineAnswer.wrong input{background:#fee2e2;border-bottom-color:#ef4444}
+.inlineAnswer.blankState input{background:#fff7ed;border-bottom-color:#fb923c}
+ol li{margin:12px 0}
+.mapWrap{display:flex;justify-content:center;margin:14px 0}
+.mapWrap img{max-width:100%;height:auto;border:1px solid #cbd5e1;border-radius:12px;background:white}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat{background:#f8fafc;border-radius:12px;padding:12px;text-align:center}
+.stat b{font-size:23px;color:var(--teal)}
+.answerPanel{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px;max-height:330px;overflow:auto}
+.miniAnswer{border:1px solid #e2e8f0;background:#fbfdff;border-radius:10px;padding:7px;text-align:center;font-size:12px}
+.miniAnswer b{color:var(--teal)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.row button{width:auto}
+.resultBox{border:1px dashed #cbd5e1;border-radius:12px;padding:12px;background:#f8fafc;margin-top:12px;white-space:pre-line}
+.small{font-size:13px;color:#64748b}
+.notice{padding:10px 12px;border-radius:10px;background:#fff7ed;border:1px solid #fdba74;color:#9a3412;font-size:13px;margin-bottom:10px}
+@media(max-width:950px){
+ header{position:static;display:block}
+ .timer{text-align:left;margin-top:8px}
+ .controls,.layout,.formGrid{grid-template-columns:1fr}
+ .answerPanel{grid-template-columns:repeat(5,1fr)}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="logo">TEC</div>
+    <div>
+      <h1>IELTS Listening Mock Test 4</h1>
+      <div class="sub">Được thực hiện bởi thầy Kiệt - 0333 762 756</div>
+    </div>
+  </div>
+  <div>
+    <div class="timer" id="timer">40:00</div>
+    <div class="small">Test time</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="panel controls">
+    <div><label>Student name</label><input id="studentName" placeholder="Enter your full name"></div>
+    <div><label>Class</label><input id="studentClass" placeholder="Enter your class"></div>
+    <button class="light" onclick="resetTimer()">Reset timer</button>
+    <button class="red" onclick="resetTest()">Reset test</button>
+  </div>
+
+  <div class="panel">
+    <div class="notice"><strong>Exam mode:</strong> Each recording can be started once only. You may view other sections while audio continues playing. Seeking and playback-speed changes are disabled.</div>
+    <div class="tabs" id="tabs"></div>
+  </div>
+
+  <div class="layout">
+    <div class="panel questionText">
+      <h2 id="sectionTitle"></h2>
+      <div class="small" id="questionRange"></div>
+      <div id="questionBody"></div>
+    </div>
+
+    <div>
+      <div class="panel">
+        <div class="playerCard">
+          <div class="playerTitle" id="playerTitle">Recording</div>
+          <div class="audioStatus" id="audioStatus">Ready to start</div>
+          <div class="progressOuter"><div class="progressInner" id="audioProgress"></div></div>
+          <div class="timeRow"><span id="audioCurrent">00:00</span><span id="audioDuration">--:--</span></div>
+          <div class="playerButtons">
+            <button id="startAudioBtn" onclick="startAudio()">▶ Start recording</button>
+          </div>
+          <div id="persistentAudioContainer"></div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b id="answeredBox">0</b><div class="small">Answered</div></div>
+          <div class="stat"><b id="scoreBox">0/40</b><div class="small">Score</div></div>
+        </div>
+
+        <div class="answerPanel" id="answerPanel"></div>
+
+        <div class="row">
+          <button onclick="checkAnswers()">Submit & mark</button>
+          <button class="light" onclick="downloadReport()">Download report</button>
+          <button class="light" onclick="clearAnswers()">Clear answers</button>
+        </div>
+
+        <div class="resultBox" id="resultBox">Your result will appear here after submission.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../supabase-config.js"></script>
+<script src="listening-storage.js"></script>
+<script>
+const SECTIONS=[{"title": "Section 1", "range": "Questions 1–10", "objectPath": "tests/L04/section-01.mp3", "questions": "\n<h3>Questions 1–7</h3>\n<p>Complete the notes below. Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.</p>\n<div class=\"noteBox\">\n<h3>Holiday on Jackson Island</h3>\n<table class=\"ieltsTable\">\n<tr><th>Place</th><th>Anna's accommodation</th><th>Things Anna did</th><th>Anna's recommendation</th></tr>\n<tr><td>Camford</td><td>with cousin</td><td>went shopping in the market</td><td>need to take <span class=\"inlineAnswer\" data-q=\"1\"></span></td></tr>\n<tr><td>Newtown</td><td></td><td>bus tour</td><td>visit the <span class=\"inlineAnswer\" data-q=\"2\"></span></td></tr>\n<tr><td>Golden Beach</td><td>in a <span class=\"inlineAnswer\" data-q=\"3\"></span></td><td><span class=\"inlineAnswer\" data-q=\"4\"></span></td><td>stay for at least <span class=\"inlineAnswer\" data-q=\"5\"></span></td></tr>\n<tr><td><span class=\"inlineAnswer\" data-q=\"6\"></span></td><td>in a motel</td><td>went <span class=\"inlineAnswer\" data-q=\"7\"></span></td><td>book some lessons in advance</td></tr>\n</table>\n</div>\n<h3>Questions 8–10</h3>\n<p>Complete the notes below. Write <strong>ONE WORD ONLY</strong> for each answer.</p>\n<div class=\"noteBox\">\n<h3>More Advice</h3>\n<p>• Try the <span class=\"inlineAnswer\" data-q=\"8\"></span> at the café on the mountain.</p>\n<p>• Hire a <span class=\"inlineAnswer\" data-q=\"9\"></span>.</p>\n<p>• Buy a <span class=\"inlineAnswer\" data-q=\"10\"></span> before the holiday.</p>\n</div>\n"}, {"title": "Section 2", "range": "Questions 11–20", "objectPath": "tests/L04/section-02.mp3", "questions": "\n<h3>Questions 11–12</h3>\n<p>Choose <strong>TWO</strong> letters, A–E.</p>\n<div class=\"optionsBox\">\n<strong>Which TWO kinds of people are the scholarships intended for?</strong><br><br>\nA people working as temporary staff<br>\nB people with management experience<br>\nC people straight from college<br>\nD people with at least three years' experience<br>\nE people with or without qualifications\n</div>\n<p>11 <span class=\"inlineAnswer letter\" data-q=\"11\"></span> &nbsp;&nbsp; 12 <span class=\"inlineAnswer letter\" data-q=\"12\"></span></p>\n\n<h3>Questions 13–14</h3>\n<p>Choose <strong>TWO</strong> letters, A–E.</p>\n<div class=\"optionsBox\">\n<strong>Which TWO things does Marie say about the hospitality industry in Scotland?</strong><br><br>\nA It mainly attracts UK tourists.<br>\nB It pays high wages.<br>\nC It is very important for the Scottish economy.<br>\nD It is highly regarded by visitors.<br>\nE It is attracting a lot of investment.\n</div>\n<p>13 <span class=\"inlineAnswer letter\" data-q=\"13\"></span> &nbsp;&nbsp; 14 <span class=\"inlineAnswer letter\" data-q=\"14\"></span></p>\n\n<h3>Questions 15–20</h3>\n<p>Choose the correct letter, <strong>A, B or C</strong>.</p>\n<ol start=\"15\">\n<li>Why did Marie start working at the Rock Hotel? <span class=\"inlineAnswer letter\" data-q=\"15\"></span><br>\nA It was the only job available.<br>B She needed a job with flexible working hours.<br>C She wanted a job working with people.</li>\n<li>What did the scholarship application process involve? <span class=\"inlineAnswer letter\" data-q=\"16\"></span><br>\nA giving a presentation<br>B writing a report about the Rock Hotel<br>C researching the role of hotel manager</li>\n<li>What does Marie say about the other winners she met? <span class=\"inlineAnswer letter\" data-q=\"17\"></span><br>\nA They were not as old as she expected.<br>B They were doing a variety of jobs in the hotel sector.<br>C Most of them had applied for scholarships before.</li>\n<li>Marie says that at the Florida Beach Hotel, every member of staff <span class=\"inlineAnswer letter\" data-q=\"18\"></span><br>\nA takes part in annual customer service training sessions.<br>B is responsible for providing an efficient service.<br>C is expected to interact with visitors.</li>\n<li>What did Marie find out about people's attitude to visiting Scotland? <span class=\"inlineAnswer letter\" data-q=\"19\"></span><br>\nA Most people would be interested in visiting it.<br>B People knew a surprising amount about it.<br>C People only wanted to see a limited number of places.</li>\n<li>What improvement has Marie introduced at the Rock Hotel? <span class=\"inlineAnswer letter\" data-q=\"20\"></span><br>\nA getting better feedback from customers<br>B providing more information for customers<br>C making contact with more customers</li>\n</ol>\n"}, {"title": "Section 3", "range": "Questions 21–30", "objectPath": "tests/L04/section-03.mp3", "questions": "\n<h3>Questions 21–26</h3>\n<p>Choose the correct letter, <strong>A, B or C</strong>.</p>\n<h3>Farmers’ attitudes to new developments in agriculture</h3>\n<ol start=\"21\">\n<li>What does Dr Owen advise Joel to include in the title of his project? <span class=\"inlineAnswer letter\" data-q=\"21\"></span><br>\nA the location of the farms<br>B the number of farmers<br>C the types of farming</li>\n<li>Why has Joel decided to do face-to-face interviews? <span class=\"inlineAnswer letter\" data-q=\"22\"></span><br>\nA to see the farmers’ workplaces<br>B to limit the time he spends on the project<br>C to get fuller answers</li>\n<li>Joel agrees to investigate how farmers get information on new developments <span class=\"inlineAnswer letter\" data-q=\"23\"></span><br>\nA by showing them a series of pictures.<br>B by asking them open questions.<br>C by sending them a checklist in advance.</li>\n<li>Concerning government communication with farmers, the speakers agree that <span class=\"inlineAnswer letter\" data-q=\"24\"></span><br>\nA much of it is irrelevant.<br>B it is often insufficient for farmers’ needs.<br>C the wording is sometimes unclear.</li>\n<li>According to Joel’s reading about the cost of making changes, many British farmers <span class=\"inlineAnswer letter\" data-q=\"25\"></span><br>\nA leave investment decisions to their accountants.<br>B have too little time to calculate the costs of new methods.<br>C are reluctant to spend money on improvements.</li>\n<li>A survey of Australian sheep farmers found that most of them <span class=\"inlineAnswer letter\" data-q=\"26\"></span><br>\nA are usually reluctant to make changes.<br>B make changes based on limited research.<br>C want plenty of evidence before they make changes.</li>\n</ol>\n\n<h3>Questions 27–30</h3>\n<p>What opinion is expressed about each book? Choose <strong>FOUR</strong> answers from the box.</p>\n<div class=\"optionsBox\">\nA It’s badly organised.<br>\nB It’s out of date.<br>\nC It’s clear.<br>\nD It’s essential reading.<br>\nE It’s inaccurate.<br>\nF It’s well illustrated.<br>\nG It’s boring.\n</div>\n<ol start=\"27\">\n<li>Contemporary Farming Manual <span class=\"inlineAnswer letter\" data-q=\"27\"></span></li>\n<li>Running a Small Farm <span class=\"inlineAnswer letter\" data-q=\"28\"></span></li>\n<li>Agriculture and Economics <span class=\"inlineAnswer letter\" data-q=\"29\"></span></li>\n<li>How to Survive in Farming <span class=\"inlineAnswer letter\" data-q=\"30\"></span></li>\n</ol>\n"}, {"title": "Section 4", "range": "Questions 31–40", "objectPath": "tests/L04/section-04.mp3", "questions": "\n<h3>Questions 31–40</h3>\n<p>Complete the notes below. Write <strong>ONE WORD ONLY</strong> for each answer.</p>\n<div class=\"noteBox\">\n<h3>Aboriginal Textile Design</h3>\n<p><strong>Ernabella Arts Centre</strong></p>\n<p>• Artists produce craft and learn new techniques.</p>\n<p>• Initially, artists produced rugs made from <span class=\"inlineAnswer\" data-q=\"31\"></span>.</p>\n<p>• Later artists made batik and screen-printed fabrics.</p>\n\n<p><strong>Tiwi Designs</strong></p>\n<p>• Early designs included <span class=\"inlineAnswer\" data-q=\"32\"></span> images.</p>\n<p>• Designs are linked to traditional beliefs, e.g. some designs are believed to bring <span class=\"inlineAnswer\" data-q=\"33\"></span>.</p>\n\n<p><strong>Jimmy Pike</strong></p>\n<p>• Inspired by the Australian landscape, especially the <span class=\"inlineAnswer\" data-q=\"34\"></span>.</p>\n<p>• Started creating art when he was in <span class=\"inlineAnswer\" data-q=\"35\"></span>.</p>\n<p>• His textiles were used to make <span class=\"inlineAnswer\" data-q=\"36\"></span>.</p>\n\n<p><strong>Bronwyn Bancroft</strong></p>\n<p>• Her work is a modern look at <span class=\"inlineAnswer\" data-q=\"37\"></span> and nature.</p>\n<p>• 1995 – painted a successful Aboriginal athlete’s jeans with lizards and a <span class=\"inlineAnswer\" data-q=\"38\"></span>.</p>\n<p>• 2001 – designed a “Journey of a Nation” parade outfit with part of a <span class=\"inlineAnswer\" data-q=\"39\"></span> on it.</p>\n\n<p><strong>Copyright issues</strong></p>\n<p>• Exploiting Aboriginal imagery affects the artists and the cultural group, e.g. “The <span class=\"inlineAnswer\" data-q=\"40\"></span> Case”.</p>\n</div>\n"}];
+const ANSWERS={"1": ["CASH"], "2": ["MUSEUM"], "3": ["CARAVAN"], "4": ["SAILING"], "5": ["FOUR DAYS", "4 DAYS"], "6": ["WHITE MOUNTAIN"], "7": ["SNOW BOARDING", "SNOWBOARDING"], "8": ["CAKES"], "9": ["CAR"], "10": ["MAP"], "11": ["D", "E"], "12": ["D", "E"], "13": ["C", "D"], "14": ["C", "D"], "15": ["B"], "16": ["B"], "17": ["A"], "18": ["C"], "19": ["C"], "20": ["A"], "21": ["A"], "22": ["C"], "23": ["B"], "24": ["A"], "25": ["B"], "26": ["B"], "27": ["G"], "28": ["E"], "29": ["D"], "30": ["B"], "31": ["WOOL"], "32": ["BIRD"], "33": ["RAIN"], "34": ["DESERT"], "35": ["PRISON"], "36": ["CLOTHING"], "37": ["FAMILY"], "38": ["RAINBOW"], "39": ["SNAKE"], "40": ["CARPET"]};
+const STORAGE="tec_listening_mock4_state";
+const TIMEKEY="tec_listening_mock4_time";
+const PLAYKEY="tec_listening_mock4_played_";
+
+let state=JSON.parse(localStorage.getItem(STORAGE)||"{}");
+state.answers=state.answers||{};
+let currentIndex=0;
+let seconds=Number(localStorage.getItem(TIMEKEY)||2400);
+let activeAudio=null;
+let startedThisSession=false;
+const audioPlayers=[];
+
+function norm(v){
+  return String(v||"").trim().replace(/[’']/g,"'").replace(/\s+/g," ").toUpperCase();
+}
+function formatTime(s){
+  if(!isFinite(s))return "--:--";
+  s=Math.max(0,Math.floor(s));
+  return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+}
+function save(){
+  state.studentName=studentName.value;
+  state.studentClass=studentClass.value;
+  document.querySelectorAll(".answerInput").forEach(inp=>state.answers[inp.dataset.q]=inp.value);
+  localStorage.setItem(STORAGE,JSON.stringify(state));
+}
+function init(){
+  studentName.value=state.studentName||"";
+  studentClass.value=state.studentClass||"";
+  studentName.addEventListener("input",save);
+  studentClass.addEventListener("input",save);
+
+  tabs.innerHTML=SECTIONS.map((s,i)=>`<button class="tab ${i===0?"active":""}" onclick="showSection(${i})">${s.title}<br><span class="small">${s.range}</span></button>`).join("");
+  answerPanel.innerHTML=Array.from({length:40},(_,i)=>`<div class="miniAnswer" id="mini${i+1}"><b>${i+1}</b><br><span>-</span></div>`).join("");
+
+  createPersistentAudioPlayers();
+  showSection(0);
+  updateTimer();
+  updateStats();
+}
+function showSection(i){
+  save();
+  currentIndex=i;
+  document.querySelectorAll(".tab").forEach((b,idx)=>b.classList.toggle("active",idx===i));
+  const s=SECTIONS[i];
+  sectionTitle.textContent=s.title;
+  questionRange.textContent=s.range;
+  questionBody.innerHTML=s.questions;
+  buildInputs();
+  bindPlayerPanel();
+  updateStats();
+}
+function buildInputs(){
+  document.querySelectorAll(".inlineAnswer").forEach(span=>{
+    const q=span.dataset.q;
+    span.innerHTML=`<input class="answerInput" data-q="${q}" id="q${q}" placeholder="${q}" autocomplete="off">`;
+    const inp=span.querySelector("input");
+    inp.value=state.answers[q]||"";
+    inp.addEventListener("input",()=>{save();updateStats();});
+  });
+}
+function createPersistentAudioPlayers(){
+  const holder=document.getElementById("persistentAudioContainer");
+  holder.innerHTML="";
+  SECTIONS.forEach((s,i)=>{
+    const el=document.createElement("audio");
+    el.preload="metadata";
+    el.src=window.TEC_LISTENING_AUDIO.publicUrl(s.objectPath);
+    el.dataset.index=i;
+    el._lastTime=0;
+    el._startedThisSession=false;
+    el.addEventListener("loadedmetadata",()=>{ if(i===currentIndex) bindPlayerPanel(); });
+    el.addEventListener("timeupdate",()=>{
+      el._lastTime=el.currentTime;
+      if(i===currentIndex) updatePlayerPanel(i);
+    });
+    el.addEventListener("ended",()=>{
+      if(i===currentIndex) bindPlayerPanel();
+    });
+    el.addEventListener("pause",()=>{
+      if(el._startedThisSession && !el.ended){
+        setTimeout(()=>{ if(el.paused && !el.ended) el.play().catch(()=>{}); },100);
+      }
+    });
+    el.addEventListener("seeking",()=>{
+      if(el._startedThisSession && Math.abs(el.currentTime-el._lastTime)>1.5){
+        el.currentTime=el._lastTime||0;
+      }
+    });
+    holder.appendChild(el);
+    audioPlayers.push(el);
+  });
+}
+
+function bindPlayerPanel(){
+  const el=audioPlayers[currentIndex];
+  activeAudio=el;
+  playerTitle.textContent=SECTIONS[currentIndex].title+" recording";
+  const played=localStorage.getItem(PLAYKEY+currentIndex)==="1";
+  startAudioBtn.disabled=played;
+  startAudioBtn.textContent=played?(el && !el.paused && !el.ended?"Recording playing":"Recording already played"):"▶ Start recording";
+  updatePlayerPanel(currentIndex);
+}
+
+function updatePlayerPanel(i){
+  const el=audioPlayers[i];
+  if(!el)return;
+  audioCurrent.textContent=formatTime(el.currentTime);
+  audioDuration.textContent=formatTime(el.duration);
+  audioProgress.style.width=((el.currentTime/el.duration)*100||0)+"%";
+  if(el.ended){
+    audioStatus.textContent="Recording finished";
+  }else if(!el.paused){
+    audioStatus.textContent="Playing — you may view other sections";
+  }else if(localStorage.getItem(PLAYKEY+i)==="1"){
+    audioStatus.textContent="This recording has already been used.";
+  }else{
+    audioStatus.textContent="Ready to start";
+  }
+}
+
+function startAudio(){
+  const el=audioPlayers[currentIndex];
+  if(!el || localStorage.getItem(PLAYKEY+currentIndex)==="1")return;
+  localStorage.setItem(PLAYKEY+currentIndex,"1");
+  el._startedThisSession=true;
+  startAudioBtn.disabled=true;
+  startAudioBtn.textContent="Recording playing";
+  audioStatus.textContent="Playing — you may view other sections";
+  el.play().catch(()=>{
+    localStorage.removeItem(PLAYKEY+currentIndex);
+    el._startedThisSession=false;
+    startAudioBtn.disabled=false;
+    startAudioBtn.textContent="▶ Start recording";
+    audioStatus.textContent="Playback was blocked. Click Start again.";
+  });
+}
+function isCorrect(q,value){
+  const u=norm(value);
+  return (ANSWERS[q]||[]).some(a=>norm(a)===u);
+}
+function updateStats(){
+  const answered=Object.values(state.answers||{}).filter(v=>String(v).trim()).length;
+  answeredBox.textContent=answered;
+  for(let i=1;i<=40;i++){
+    const mini=document.querySelector(`#mini${i} span`);
+    if(mini)mini.textContent=(state.answers[i]||"-");
+  }
+}
+function checkAnswers(){
+  save();
+  let score=0,wrong=[],blank=[];
+  for(let i=1;i<=40;i++){
+    const val=state.answers[i]||"";
+    const inp=document.getElementById("q"+i);
+    const span=inp?inp.closest(".inlineAnswer"):null;
+    if(span)span.classList.remove("correct","wrong","blankState");
+    const mini=document.getElementById("mini"+i);
+    if(!val.trim()){
+      blank.push(i);
+      if(span)span.classList.add("blankState");
+      if(mini)mini.style.background="#fff7ed";
+    }else if(isCorrect(i,val)){
+      score++;
+      if(span)span.classList.add("correct");
+      if(mini)mini.style.background="#dcfce7";
+    }else{
+      wrong.push(i);
+      if(span)span.classList.add("wrong");
+      if(mini)mini.style.background="#fee2e2";
+    }
+  }
+  scoreBox.textContent=score+"/40";
+  resultBox.textContent=`Score: ${score}/40\nIncorrect: ${wrong.length?wrong.join(", "):"None"}\nBlank: ${blank.length?blank.join(", "):"None"}`;
+}
+function correctText(q){ return (ANSWERS[q]||[]).join(" / "); }
+function downloadReport(){
+  save();
+  const lines=[
+    "TEC IELTS Listening Mock Test 4",
+    "Student: "+(studentName.value||"-"),
+    "Class: "+(studentClass.value||"-"),
+    "",
+    "ANSWERS"
+  ];
+  for(let i=1;i<=40;i++){
+    const user=(state.answers[i]||"").trim();
+    lines.push(`${i}. ${user||"(blank)"} | Correct: ${correctText(i)} | ${isCorrect(i,user)?"✓":"✗"}`);
+  }
+  const blob=new Blob([lines.join("\n")],{type:"text/plain;charset=utf-8"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=(studentName.value||"Student").replace(/[^a-z0-9]+/gi,"_")+"_Listening_Mock_Test_4_Report.txt";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+function clearAnswers(){
+  if(!confirm("Clear all answers?"))return;
+  state.answers={};
+  save();
+  document.querySelectorAll(".answerInput").forEach(i=>i.value="");
+  document.querySelectorAll(".inlineAnswer").forEach(s=>s.classList.remove("correct","wrong","blankState"));
+  scoreBox.textContent="0/40";
+  resultBox.textContent="Your result will appear here after submission.";
+  for(let i=1;i<=40;i++){
+    const mini=document.getElementById("mini"+i);
+    if(mini){mini.style.background="#fbfdff";mini.querySelector("span").textContent="-";}
+  }
+  updateStats();
+}
+function resetTimer(){
+  seconds=2400;
+  localStorage.setItem(TIMEKEY,seconds);
+  updateTimer();
+}
+function resetTest(){
+  if(!confirm("Reset the whole test, including all audio play locks?"))return;
+  audioPlayers.forEach(el=>{try{el._startedThisSession=false;el.pause();el.currentTime=0;}catch(e){}});
+  localStorage.removeItem(STORAGE);
+  localStorage.removeItem(TIMEKEY);
+  for(let i=0;i<4;i++)localStorage.removeItem(PLAYKEY+i);
+  location.reload();
+}
+function updateTimer(){
+  timer.textContent=formatTime(seconds);
+}
+setInterval(()=>{
+  if(seconds>0){
+    seconds--;
+    localStorage.setItem(TIMEKEY,seconds);
+    updateTimer();
+  }
+},1000);
+
+init();
+</script>
+</body>
+</html>

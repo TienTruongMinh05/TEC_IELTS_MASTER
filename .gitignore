@@ -1,0 +1,8 @@
+# Local audio sources and exports
+audio-staging/
+*.wav
+
+# Local environment secrets
+.env
+.env.*
+!.env.example
