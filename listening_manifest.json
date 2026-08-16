@@ -16,7 +16,7 @@
     {
       "id": "L2",
       "title": "TEC IELTS Listening Mock Test 2",
-      "available": false,
+      "available": true,
       "sections": [
         { "number": 1, "label": "Section 1", "objectPath": "tests/L02/section-01.mp3" },
         { "number": 2, "label": "Section 2", "objectPath": "tests/L02/section-02.mp3" },
@@ -27,7 +27,7 @@
     {
       "id": "L3",
       "title": "TEC IELTS Listening Mock Test 3",
-      "available": false,
+      "available": true,
       "sections": [
         { "number": 1, "label": "Section 1", "objectPath": "tests/L03/section-01.mp3" },
         { "number": 2, "label": "Section 2", "objectPath": "tests/L03/section-02.mp3" },
@@ -38,7 +38,7 @@
     {
       "id": "L4",
       "title": "TEC IELTS Listening Mock Test 4",
-      "available": false,
+      "available": true,
       "sections": [
         { "number": 1, "label": "Section 1", "objectPath": "tests/L04/section-01.mp3" },
         { "number": 2, "label": "Section 2", "objectPath": "tests/L04/section-02.mp3" },
@@ -49,7 +49,7 @@
     {
       "id": "L5",
       "title": "TEC IELTS Listening Mock Test 5",
-      "available": false,
+      "available": true,
       "sections": [
         { "number": 1, "label": "Section 1", "objectPath": "tests/L05/section-01.mp3" },
         { "number": 2, "label": "Section 2", "objectPath": "tests/L05/section-02.mp3" },
@@ -60,7 +60,7 @@
     {
       "id": "L6",
       "title": "TEC IELTS Listening Mock Test 6",
-      "available": false,
+      "available": true,
       "sections": [
         { "number": 1, "label": "Section 1", "objectPath": "tests/L06/section-01.mp3" },
         { "number": 2, "label": "Section 2", "objectPath": "tests/L06/section-02.mp3" },
@@ -71,7 +71,7 @@
     {
       "id": "L7",
       "title": "TEC IELTS Listening Mock Test 7",
-      "available": false,
+      "available": true,
       "sections": [
         { "number": 1, "label": "Section 1", "objectPath": "tests/L07/section-01.mp3" },
         { "number": 2, "label": "Section 2", "objectPath": "tests/L07/section-02.mp3" },

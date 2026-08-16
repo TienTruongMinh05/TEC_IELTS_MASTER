@@ -15,50 +15,50 @@
         "id": "L1",
         "title": "TEC IELTS Listening Mock Test 1",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
-        "url": "tests/TEC_IELTS_Listening_Player.html?test=L1",
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_1.html",
         "available": true
     },
     {
         "id": "L2",
         "title": "TEC IELTS Listening Mock Test 2",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
-        "url": "tests/TEC_IELTS_Listening_Player.html?test=L2",
-        "available": false
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_2.html",
+        "available": true
     },
     {
         "id": "L3",
         "title": "TEC IELTS Listening Mock Test 3",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
-        "url": "tests/TEC_IELTS_Listening_Player.html?test=L3",
-        "available": false
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_3.html",
+        "available": true
     },
     {
         "id": "L4",
         "title": "TEC IELTS Listening Mock Test 4",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
-        "url": "tests/TEC_IELTS_Listening_Player.html?test=L4",
-        "available": false
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_4.html",
+        "available": true
     },
     {
         "id": "L5",
         "title": "TEC IELTS Listening Mock Test 5",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
-        "url": "tests/TEC_IELTS_Listening_Player.html?test=L5",
-        "available": false
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_5.html",
+        "available": true
     },
     {
         "id": "L6",
         "title": "TEC IELTS Listening Mock Test 6",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
-        "url": "tests/TEC_IELTS_Listening_Player.html?test=L6",
-        "available": false
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_6.html",
+        "available": true
     },
     {
         "id": "L7",
         "title": "TEC IELTS Listening Mock Test 7",
         "subtitle": "Được thực hiện bởi thầy Kiệt",
-        "url": "tests/TEC_IELTS_Listening_Player.html?test=L7",
-        "available": false
+        "url": "tests/TEC_IELTS_Listening_Mock_Test_7.html",
+        "available": true
     },
     {
         "id": "R3",

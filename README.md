@@ -77,7 +77,9 @@ Trước khi upload, kiểm tra từng file nhỏ hơn 50 MB. Upload với `Cont
 
 Không commit audio nguồn vào Git. Khi thay audio, dùng object path có version mới như `section-01-v2.mp3`, rồi cập nhật manifest để tránh browser dùng cache cũ.
 
-## Bật một bài Listening
+## Giao diện bài Listening
+
+Mỗi bài Listening có trang HTML riêng với 40 câu hỏi, timer, chấm điểm và tải báo cáo. Audio không được nhúng vào HTML; trang dùng `tests/listening-storage.js` để tạo public URL từ object path trong Supabase.
 
 Một bài chỉ được bật khi đủ và kiểm tra được cả 4 section:
 
@@ -87,13 +89,13 @@ Một bài chỉ được bật khi đủ và kiểm tra được cả 4 section
 4. Trong `task_list.json`, đổi `available` của cùng bài thành `true`.
 5. Kiểm tra player tự chuyển Section 1 → 4.
 
-Các bài có `available: false` hiển thị **Đang cập nhật audio** và không tạo link hỏng.
+URL player cũ `tests/TEC_IELTS_Listening_Player.html?test=L1` đến `L7` vẫn được giữ để chuyển hướng sang trang bài thi tương ứng.
 
 ## Kiểm tra trước khi deploy
 
 ```powershell
 node --check script.js
-node --check tests/listening-player.js
+node --check tests/listening-storage.js
 node tests/validate-listening.mjs
 Get-Content task_list.json -Raw | ConvertFrom-Json | Out-Null
 Get-Content listening_manifest.json -Raw | ConvertFrom-Json | Out-Null
@@ -105,12 +107,13 @@ Ngoài kiểm tra tĩnh, cần xác minh thủ công:
 - Firebase Google popup đăng nhập và đăng xuất hoạt động trên domain đã được cho phép.
 - Khi chưa đăng nhập, bài có sẵn hiển thị yêu cầu đăng nhập.
 - Public object URL trả audio và hỗ trợ byte-range/HTTP 206 để tua.
-- Section 1–4 phát đúng thứ tự và tự chuyển section.
+- Mỗi trang L1–L7 hiển thị đủ 40 câu và tải đúng 4 recording tương ứng.
 - Browser không thể upload, sửa hoặc xóa object bằng publishable key.
 
 ## Cấu trúc Listening
 
 - `listening_manifest.json`: metadata và public object path.
-- `tests/TEC_IELTS_Listening_Player.html`: giao diện player dùng chung.
-- `tests/listening-player.js`: public URL, chuyển section và retry.
+- `tests/TEC_IELTS_Listening_Mock_Test_1.html` đến `_7.html`: giao diện và nội dung riêng của từng bài.
+- `tests/listening-storage.js`: kiểm tra object path và tạo public Storage URL.
+- `tests/TEC_IELTS_Listening_Player.html`: chuyển hướng tương thích cho URL cũ.
 - `supabase/migrations/`: cấu hình bucket có thể tái tạo.
